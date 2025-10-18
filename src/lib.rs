@@ -233,7 +233,7 @@ pub async fn prepare(
                     name: JOB_NAME.to_string(),
                     config: job::TaskConfig::Docker {
                         image: ci_env.job_image.clone(),
-                        entrypoint: vec!["/bin/sh".to_string()],
+                        entrypoint: vec!["/bin/bash".to_string()],
                         interactive: true,
                         volumes: vec![],
                         work_dir: "/alloc/".to_string(),
@@ -250,8 +250,8 @@ pub async fn prepare(
                 job::Task {
                     name: MANAGEMENT_NAME.to_string(),
                     config: job::TaskConfig::Docker {
-                        image: "gitlab/gitlab-runner:latest".to_string(),
-                        entrypoint: vec!["/bin/sh".to_string()],
+                        image: "registry.gitlab.com/gitlab-org/gitlab-runner:latest".to_string(),
+                        entrypoint: vec!["/bin/bash".to_string()],
                         interactive: true,
                         volumes: vec![],
                         work_dir: "/alloc".to_string(),
@@ -416,7 +416,7 @@ pub async fn run(
         config.port,
         &running_alloc.id,
         JOB_NAME,
-        &["/bin/sh"],
+        &["/bin/bash"],
     )
     .await
     .map_err(|e| RunError::StartingExecSession {
@@ -435,7 +435,7 @@ pub async fn run(
         config.port,
         &running_alloc.id,
         JOB_NAME,
-        &["/bin/sh"],
+        &["/bin/bash"],
     )
     .await
     .map_err(|e| RunError::StartingExecSession {
@@ -459,7 +459,7 @@ pub async fn run(
         config.port,
         &running_alloc.id,
         job_name,
-        &["/bin/sh", &format!("/alloc/{}", script_name)],
+        &["/bin/bash", &format!("/alloc/{}", script_name)],
     )
     .await
     .map_err(|e| RunError::StartingExecSession {
