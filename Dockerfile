@@ -20,7 +20,7 @@ COPY ./ /runner/nomad-runner
 
 RUN cargo build --release
 
-FROM gitlab/gitlab-runner:ubuntu-v18.3.0
+FROM registry.gitlab.com/gitlab-org/gitlab-runner:ubuntu-v18.3.0
 
 # Copy our build
 COPY --from=builder /runner/nomad-runner/target/release/nomad-runner /bin/nomad-runner
