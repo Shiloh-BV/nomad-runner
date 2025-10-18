@@ -233,7 +233,7 @@ pub async fn prepare(
                     name: JOB_NAME.to_string(),
                     config: job::TaskConfig::Docker {
                         image: ci_env.job_image.clone(),
-                        entrypoint: vec!["/bin/bash".to_string()],
+                        entrypoint: vec!["/bin/sh".to_string()],
                         interactive: true,
                         volumes: vec![],
                         work_dir: "/alloc/".to_string(),
@@ -416,7 +416,7 @@ pub async fn run(
         config.port,
         &running_alloc.id,
         JOB_NAME,
-        &["/bin/bash"],
+        &["/bin/sh"],
     )
     .await
     .map_err(|e| RunError::StartingExecSession {
@@ -435,7 +435,7 @@ pub async fn run(
         config.port,
         &running_alloc.id,
         JOB_NAME,
-        &["/bin/bash"],
+        &["/bin/sh"],
     )
     .await
     .map_err(|e| RunError::StartingExecSession {
@@ -459,7 +459,7 @@ pub async fn run(
         config.port,
         &running_alloc.id,
         job_name,
-        &["/bin/bash", &format!("/alloc/{}", script_name)],
+        &["/bin/sh", &format!("/alloc/{}", script_name)],
     )
     .await
     .map_err(|e| RunError::StartingExecSession {
