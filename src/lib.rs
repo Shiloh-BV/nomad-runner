@@ -251,7 +251,7 @@ pub async fn prepare(
                     name: MANAGEMENT_NAME.to_string(),
                     config: job::TaskConfig::Docker {
                         image: "gitlab/gitlab-runner:latest".to_string(),
-                        entrypoint: vec!["/bin/bash".to_string()],
+                        entrypoint: vec!["/bin/sh".to_string()],
                         interactive: true,
                         volumes: vec![],
                         work_dir: "/alloc".to_string(),
